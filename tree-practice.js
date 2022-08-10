@@ -23,12 +23,46 @@ function findMinBST (rootNode) {
 }
 
 function findMaxBST (rootNode) {
+  let max = rootNode.val;
+
+  if(rootNode === null) return;
+  if(rootNode.right === null) return rootNode.val;
+
+  let current = rootNode;
+  while(current) {
+    if(current.val > max) max = current.val;
+    current = current.right;
+  }
+
+  return max;
   // Your code here
 }
 
+
+//       4
+//     /   \
+//    5     3
+//   / \   / \
+//  2   7  1  6 
+
 function findMinBT (rootNode) {
-  // Your code here
+let min = Infinity;
+
+let stack = [rootNode]
+while (stack.length > 0){
+  let currentNode = stack.pop();
+  if(currentNode.val < min) min = currentNode.val;
+  // console.log(min)
+  if (currentNode.left) stack.push(currentNode.left);
+  if (currentNode.right) stack.push(currentNode.right);
 }
+
+return min;
+
+}
+
+
+  // Your code here
 
 function findMaxBT (rootNode) {
   // Your code here
