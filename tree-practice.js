@@ -111,6 +111,15 @@ function countNodes (rootNode) {
 }
 
 function balancedTree (rootNode) {
+  let leftHi = 0;
+  let rightHi = 0;
+
+  if(rootNode.left) {leftHi = getHeight(rootNode.left)};
+  if(rootNode.right) {rightHi = getHeight(rootNode.right)}
+  
+ 
+  return Math.abs(leftHi - rightHi) <= 1;
+
   // Your code here
 }
 
