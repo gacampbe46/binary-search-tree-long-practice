@@ -39,41 +39,75 @@ function findMaxBST (rootNode) {
 }
 
 
-//       4
-//     /   \
-//    5     3
-//   / \   / \
-//  2   7  1  6 
-
 function findMinBT (rootNode) {
-let min = Infinity;
+  let min = Infinity;
 
-let stack = [rootNode]
-while (stack.length > 0){
-  let currentNode = stack.pop();
-  if(currentNode.val < min) min = currentNode.val;
-  // console.log(min)
-  if (currentNode.left) stack.push(currentNode.left);
-  if (currentNode.right) stack.push(currentNode.right);
+  let stack = [rootNode]
+  while (stack.length > 0){
+    let currentNode = stack.pop();
+    if(currentNode.val < min) min = currentNode.val;
+    // console.log(min)
+    if (currentNode.left) stack.push(currentNode.left);
+    if (currentNode.right) stack.push(currentNode.right);
+  }
+
+  return min;
 }
-
-return min;
-
-}
-
-
-  // Your code here
-
 function findMaxBT (rootNode) {
-  // Your code here
+  let max = -Infinity;
+
+  let stack = [rootNode]
+  while (stack.length > 0){
+    let currentNode = stack.pop();
+    if(currentNode.val > max) max = currentNode.val;
+    if (currentNode.left) stack.push(currentNode.left);
+    if (currentNode.right) stack.push(currentNode.right);
+  }
+
+  return max;
 }
+
+
+//       4          height 0 -> 1
+//     /   \
+//    5     3       height 1
+//   / \   / \
+//  2   7  1  6
+//     /
+//    0
 
 function getHeight (rootNode) {
-  // Your code here
+  // let leftHeight = 0;
+  // let rightHeight = 0;
+  rootNode.height = 0;
+  let maxHeight = rootNode.height;
+
+  let queue = [rootNode];
+      while(queue.length > 0){
+        let currentNode = queue.shift();
+        if(currentNode.height > maxHeight) maxHeight = currentNode.height;
+
+        if(currentNode.left) currentNode.left.height = currentNode.height + 1;
+        if(currentNode.right) currentNode.right.height = currentNode.height + 1;
+
+        if(currentNode.left) queue.push(currentNode.left);
+        if(currentNode.right) queue.push(currentNode.right);
+      }
+
+  return maxHeight;
 }
 
 function countNodes (rootNode) {
-  // Your code here
+  let count = 0;
+  let stack = [rootNode]
+    while (stack.length > 0){
+      let currentNode = stack.pop();
+      count++;
+      if (currentNode.left) stack.push(currentNode.left);
+      if (currentNode.right) stack.push(currentNode.right);
+    }
+
+  return count;
 }
 
 function balancedTree (rootNode) {
